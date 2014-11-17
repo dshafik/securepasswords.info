@@ -37,7 +37,67 @@
             <h2>ZF 2</h2>
         </header>
         <div>
-            <p>Zend Framework 2</p>
+            <p>Zend Framework 2 ships with the <code>Zend\Crypt</code> component, which can be used to generate secure password hashes.</p>
+
+<h2>Installation</h2>
+
+<p>To use it, first install <code>Zend\Crypt</code> via <a href="https://getcomposer.org/">composer</a>:</p>
+
+<pre><code class="sh">composer require "zendframework/zend-crypt:2.*"
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Whenever you want to generate a new password, just create a new <code>Bcrypt</code> instance as following:</p>
+
+<pre><code class="php">use Zend\Crypt\Password\Bcrypt;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$bcrypt = new Bcrypt();
+
+$secureHash = $bcrypt-&gt;create($clearTextPassword);
+</code></pre>
+
+<h3>Verifying a password</h3>
+
+<p>Verifying a password is also done via the <code>Bcrypt</code> instance:</p>
+
+<pre><code class="php">if ($bcrypt-&gt;verify($clearTextPassword, $secureHash)) {
+    echo "Password matches!";
+} else {
+    echo "Password does NOT match!";
+}
+</code></pre>
+
+<h3>Authenticating a user against a database</h3>
+
+<p>Please note that you should always authenticate your users against a database by first fetching the identity by
+identifier or username, and <strong>only then</strong> verifying the user against the given password:</p>
+
+<pre><code class="php">$user = $usersGateway-&gt;select(['username' =&gt; $inputUsername]);
+
+if ($user &amp;&amp; $bcrypt-&gt;verify($inputPassword, $user-&gt;getPasswordHash())) {
+    // valid login, may store user identity into session here
+}
+</code></pre>
+
+<h3>Increasing hash strength</h3>
+
+<p>If you want to generate stronger hashes, you may increase the <code>cost</code> of your <code>Bcrypt</code> hash. The current
+default value is <code>10</code>, but as computers get faster, slower hashes may be needed:</p>
+
+<pre><code class="php">$bcrypt = new Bcrypt(['cost' =&gt; 16]);
+
+$secureHash = $bcrypt-&gt;create($clearTextPassword);
+</code></pre>
+
+<h3>Integration with <code>Zend\Mvc</code></h3>
+
+<p>Authentication and security are hard: if you use the full-stack ZF2 framework, then you can just plug
+the <a href="https://github.com/ZF-Commons/ZfcUser"><code>ZfcUser</code></a> module into your applications.
+Using ZfcUser instead of your own homebrew authentication system will give you the advantage of always
+having an the latest known security vulnerabilities fixed for you by experienced community members.</p>
 
         </div>
     </article>
