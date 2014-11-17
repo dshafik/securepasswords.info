@@ -37,7 +37,52 @@
             <h2>Ruby on Rails</h2>
         </header>
         <div>
-            <p><strong>Ruby on Rails</strong></p>
+            <p>Automatic support for bcrypt has been available in Rails since 3.0, thanks to <code>ActiveModel::SecurePassword</code>.</p>
+
+<h2>Installation</h2>
+
+<p>To use it, first add bcrypt to your <code>Gemfile</code>:</p>
+
+<pre><code class="ruby">gem 'bcrypt', '~&gt; 3.1.7'
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Then add a <code>password_digest</code> attribute, and call <code>has_secure_password</code>:</p>
+
+<pre><code class="ruby"># Schema: User(name:string, password_digest:string)
+class User &lt; ActiveRecord::Base
+  has_secure_password
+end
+</code></pre>
+
+<h3>Hashing a Password</h3>
+
+<p>At this point, you can then pass in either a password and <code>password_confirmation</code> arguments, or just the <code>password</code> argument alongside setting the validations argument to <code>false</code>:</p>
+
+<pre><code class="ruby">user = User.new(name: 'Davey', password: 'password', password_confirmation: 'password')
+user.save
+</code></pre>
+
+<p>Or without confirmation:</p>
+
+<pre><code class="ruby">user = User.new(name: 'Davey', password: 'password', validations: false)
+user.save
+</code></pre>
+
+<h3>Verifying a Password</h3>
+
+<p>Then to authenticate, you can either call the authenticate method:</p>
+
+<pre><code class="ruby">user.authenticate('password')
+</code></pre>
+
+<p>Or you can do it when retrieving the user from the database:</p>
+
+<pre><code class="ruby">User.find_by(name: 'Davey').try(:authenticate, 'password')
+</code></pre>
+
+<p>This method will only return a valid user object if the password is correct, otherwise it will return <code>false</code>.</p>
 
         </div>
     </article>
