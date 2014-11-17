@@ -54,6 +54,17 @@ if ($user && $bcrypt->verify($inputPassword, $user->getPasswordHash())) {
 }
 ```
 
+### Increasing hash strength
+
+If you want to generate stronger hashes, you may increase the `cost` of your `Bcrypt` hash. The current
+default value is `10`, but as computers get faster, slower hashes may be needed:
+
+```php
+$bcrypt = new Bcrypt(['cost' => 16]);
+
+$secureHash = $bcrypt->create($clearTextPassword);
+```
+
 ### Integration with `Zend\Mvc`
 
 Authentication and security are hard: if you use the full-stack ZF2 framework, then you can just plug
