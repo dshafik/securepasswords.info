@@ -1,0 +1,97 @@
+.navbar-inverse h1 {
+	margin-top: 0;
+	margin-bottom: 35px;
+}
+
+.navbar-inverse .navbar-brand {
+  font-family: 'Lobster', cursive;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 50px;
+  color: #fff;
+}
+
+.navbar-inverse {
+  border: none;
+}
+
+.social-share {
+ display: inline-block;
+ list-style: none;
+ padding: 0;
+ margin-top: 20px;
+}
+
+ul.social-share li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+ul.social-share li a {
+  display: inline-block;
+  color: #fff;
+  background: #404040;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 36px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+ul.social-share li a:hover {
+  background: #c52d2f;
+  color: #fff;
+}
+
+
+.language a {
+  display: block;
+  height: 150px; 
+  padding: 0 10px;
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+  text-decoration: none;
+}
+
+.language a:hover {
+  opacity: 0.5;
+}
+
+.language a h2 {
+	  line-height: 150px;
+}
+
+#footer {
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #fff;
+  background: #2e2e2e;
+}
+
+#footer a {
+  color: #fff;
+}
+
+#footer a:hover {
+  color: #c52d2f;
+}
+
+#footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer ul > li {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+pre {
+	background-color: inherit;
+	border: none;
+}
