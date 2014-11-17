@@ -1,0 +1,12 @@
+---
+layout: index
+title: Home
+generator: pagination
+pagination:
+    max_per_page: 10000
+use:
+    - posts
+---
+{% for post in page.pagination.items %}
+	{% include 'block' %}
+{% endfor %}

@@ -1,0 +1,11 @@
+{% extends "index" %}
+{% block content_wrapper %}
+    <article>
+        <header>
+            <h2>{{ page.title }}</h2>
+        </header>
+        <div>
+            {{ page.blocks.content|raw }}
+        </div>
+    </article>
+{% endblock %}

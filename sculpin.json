@@ -1,0 +1,21 @@
+{
+    "name": "dshafik/securepasswords.info",
+    "description": "Better password security through documentation",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Davey Shafik",
+            "email": "me@daveyshafik.com",
+            "homepage": "http://daveyshafik.com"
+        }
+    ],
+    "require": {
+        "components/jquery": "~1.9.1",
+        "components/bootstrap": "~3.0",
+        "components/font-awesome": "~4.2",
+        "components/highlightjs": "~7.3.0"
+    },
+    "config": {
+        "component-dir": "source/components"
+    }
+}
