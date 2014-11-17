@@ -1,5 +1,5 @@
 sculpin_content_types:
     posts:
-        permalink: :title.html
+        permalink: :title/
 sculpin_theme:
     theme: dshafik/securepasswords.info
