@@ -25,8 +25,13 @@ $ git rebase upstream/master
 $ git checkout -b reason-for-changes
 ```
 
+### Install Sculpin
 
-## Editing an Existing Example: 
+In order to test your edited or new examples, you'll need to have Sculpin installed
+in your dev environment. Please see the [Sculpin "Get Started"](https://sculpin.io/getstarted/) guide
+for installation instructions.
+
+## Editing an Existing Example:
 
 
 Find the file in `_posts`, e.g. `php.md` and edit using Markdown.
@@ -58,7 +63,7 @@ background: 757eb1
 In the root directory, to test run:
 
 ```sh
-$ sculpin generate --watch --server`
+$ sculpin generate --watch --server
 ```
 Then visit <http://localhost:8000>
 
