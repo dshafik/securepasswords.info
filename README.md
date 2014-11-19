@@ -1,11 +1,10 @@
 # securepasswords.info
 
-
-A polyglot repo of examples for using secure passwords (typically bcrypt)
+A polyglot repo of [examples for using secure passwords](http://securepasswords.info/) (typically bcrypt).
 
 ## Contributing
 
-Please read the [CONTRIBUTING.md](/blob/master/CONTRIBUTING.md) document for details
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) document for details
 
 ## License
 
