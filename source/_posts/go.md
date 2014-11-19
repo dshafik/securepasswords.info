@@ -1,8 +1,8 @@
 ---
 title: Go
 layout: post
-color: fff
-background: ff66ff
+color: "000"
+background: 85daf7 
 ---
 
 Go&rsquo;s excellent [crypto libraries](https://golang.org/pkg/crypto) make it really easy to have secure, salted passwords.
