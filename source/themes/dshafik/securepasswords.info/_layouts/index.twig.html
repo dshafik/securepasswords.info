@@ -14,12 +14,19 @@
     <link rel="shortcut icon" href="/{{ theme_path('assets/images/ico/favicon.ico') }}">
 </head><!--/head-->
 <body>
-
     <header id="header">
-        <nav class="navbar navbar-inverse" role="banner">
+		{% if page.background %}
+        <nav class="navbar navbar-inverse" style="background-color: #{{ page.background }};" role="banner">
+		{% else %}
+		<nav class="navbar navbar-inverse" role="banner">
+		{% endif %}
             <div class="container">
                 <h1 class="navbar-header">
+					{% if page.color %}
+                    <a class="navbar-brand" style="color: #{{ page.color }} !important;" href="/">{{ site.title }}</a>
+					{% else %}
                     <a class="navbar-brand" href="/">{{ site.title }}</a>
+					{% endif %}
                 </h1>
                 <ul class="social-share pull-right">
                     <li><a href="https://twitter.com/securepasswrds"><i class="fa fa-twitter"></i></a></li>
@@ -27,15 +34,15 @@
                 </ul>
             </div><!--/.container-->
         </nav><!--/nav-->
-        
     </header><!--/header-->
-    <section id="portfolio">
+
+    <section>
         <div class="container">
             <div class="row">
 				{% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
             </div>
         </div>
-    </section><!--/#portfolio-item-->
+    </section>
 
     <footer id="footer">
         <div class="container">
