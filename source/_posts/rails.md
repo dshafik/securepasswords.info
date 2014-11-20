@@ -16,15 +16,21 @@ Automatic support for bcrypt has been available in Rails since 3.0, thanks to `A
 
 ## Installation
 
-To use it, first add bcrypt to your `Gemfile`:
+To install add bcrypt to your `Gemfile`:
 
 ```ruby
 gem 'bcrypt', '~> 3.1.7'
 ```
 
+Then install:
+
+```sh
+$ bundle install
+```
+
 ## Usage
 
-Then add a `password_digest` attribute, and call `has_secure_password`:
+Add a `password_digest` attribute, and call `has_secure_password` to your model:
 
 ```ruby
 # Schema: User(name:string, password_digest:string)
