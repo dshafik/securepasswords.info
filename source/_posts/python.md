@@ -3,6 +3,10 @@ title: Python
 layout: post
 color: fff
 background: 1a3655
+author: "Samantha Quiñones"
+author_url: "http://tembies.com"
+author_twitter: "ieatkillerbees"
+gravatar: "24368af16c4b0946ece77da839b7b53a"
 ---
 
 There are many Python libraries available that deal with hashing and security, but for managing passwords, one of the 
@@ -13,6 +17,7 @@ This guide will cover bcrypt which is _usually_ the best option available.
 
 
 ## Installation
+
 Passlib supports 4 different bcrypt backends and provides its own pure-python fallback implementation (which should 
 probably not be used in production). Passlib will use the first one of the following:
 
