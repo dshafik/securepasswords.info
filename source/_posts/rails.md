@@ -30,7 +30,7 @@ $ bundle install
 
 ## Usage
 
-Add a `password_digest` attribute, and call `has_secure_password` to your model:
+To use it, add a `password_digest` attribute, and call `has_secure_password` to your model:
 
 ```ruby
 # Schema: User(name:string, password_digest:string)
