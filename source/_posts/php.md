@@ -1,8 +1,15 @@
 ---
-title: PHP
-layout: post
-color: fff
-background: 757eb1
+title: "PHP"
+layout: "post"
+color: "fff"
+background: "757eb1"
+author: "Davey Shafik"
+author_url: "http://daveyshafik.com"
+author_twitter: "dshafik"
+gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
+sponsor: "Engine Yard"
+sponsor_url: "https://www.engineyard.com"
+sponsor_twitter: EngineYard
 ---
 
 With PHP 5.5, a new [password extension](http://php.net/password) was added to that makes password security easy by default.

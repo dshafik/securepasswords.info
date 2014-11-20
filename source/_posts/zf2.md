@@ -1,8 +1,16 @@
 ---
-title: ZF 2
-layout: post
-color: fff
-background: 59a93a 
+title: "Zend Framework 2"
+tile: "ZF 2"
+layout: "post"
+color: "fff"
+background: "59a93a"
+author: "Marco Pivetta"
+author_url: "http://ocramius.github.io"
+author_twitter: Ocramius
+gravatar: "3cf7a8ab0bccee5b65d39b50a170a555"
+sponsor: "Roave"
+sponsor_url: "https://roave.com"
+sponsor_twitter: RoaveTeam
 ---
 
 Zend Framework 2 ships with the `Zend\Crypt` component, which can be used to generate secure password hashes.

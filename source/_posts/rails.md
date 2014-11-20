@@ -1,8 +1,15 @@
 ---
-title: Ruby on Rails
+title: "Ruby on Rails"
 layout: post
-color: fff
-background: 9a1d26
+color: "fff"
+background: "9a1d26"
+author: "Davey Shafik"
+author_url: "http://daveyshafik.com"
+author_twitter: "dshafik"
+gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
+sponsor: "Engine Yard"
+sponsor_url: "https://www.engineyard.com"
+sponsor_twitter: EngineYard
 ---
 
 Automatic support for bcrypt has been available in Rails since 3.0, thanks to `ActiveModel::SecurePassword`. 
