@@ -74,9 +74,9 @@ The last part of the puzzle is ensuring that passwords are kept up to date. We c
 <?php
 $user = User::findByUsername($username);
 if (password_verify($_POST['password'], $user->password)) {
-        if (password_needs_rehash($user->password, PASSWORD_DEFAULT, ['cost' => 12])) {
-        	$user->updatePassword($_POST['password']);
-    	}
+	if (password_needs_rehash($user->password, PASSWORD_DEFAULT, ['cost' => 12])) {
+        $user->updatePassword($_POST['password']);
+	}
 } else {
      // Password does not match
 }
