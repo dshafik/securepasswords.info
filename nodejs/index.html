@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SecurePasswords.info | Ruby on Rails</title>
+    <title>SecurePasswords.info | Node.js</title>
     <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/themes/dshafik/securepasswords.info/assets/css/site.css" rel="stylesheet">
@@ -15,7 +15,7 @@
 </head><!--/head-->
 <body>
     <header id="header">
-		        <nav class="navbar navbar-inverse" style="background-color: #9a1d26;" role="banner">
+		        <nav class="navbar navbar-inverse" style="background-color: #6fb424;" role="banner">
 		            <div class="container">
                 <h1 class="navbar-header">
 					                    <a class="navbar-brand" style="color: #fff !important;" href="/">SecurePasswords.info</a>
@@ -33,60 +33,110 @@
             <div class="row">
 				    <article>
         <header>
-            <h1>Ruby on Rails</h1>
+            <h1>Node.js</h1>
         </header>
         <div>
-            <p>Automatic support for bcrypt has been available in Rails since 3.0, thanks to <code>ActiveModel::SecurePassword</code>.</p>
+            <p>Node.js has multiple packages available that provide bcrypt, the most popular is a wrapper around the OpenBSD C library.</p>
 
 <h2>Installation</h2>
 
-<p>To install add bcrypt to your <code>Gemfile</code>:</p>
+<p>Installation is done with npm:</p>
 
-<pre><code class="ruby">gem 'bcrypt', '~&gt; 3.1.7'
-</code></pre>
-
-<p>Then install:</p>
-
-<pre><code class="sh">$ bundle install
+<pre><code class="sh">$ npm install bcrypt
 </code></pre>
 
 <h2>Usage</h2>
 
-<p>Add a <code>password_digest</code> attribute, and call <code>has_secure_password</code> to your model:</p>
+<p>The package allows for both asynchronous (recommended) and synchronous usage.</p>
 
-<pre><code class="ruby"># Schema: User(name:string, password_digest:string)
-class User &lt; ActiveRecord::Base
-  has_secure_password
-end
+<h3>Asynchronous Usage</h3>
+
+<h4>Hashing a Password</h4>
+
+<p>To hash a password asynchronously, we call <code>bcrypt.hash()</code>:</p>
+
+<pre><code class="js">var bcrypt = require('bcrypt');
+
+bcrypt.hash('password', 10, function(err, hash) {
+        // Store the hash
+});
 </code></pre>
 
-<h3>Hashing a Password</h3>
+<p>The first argument is the password, the second is the <code>cost</code>, and the last is a callback into which two arguments are passed:</p>
 
-<p>At this point, you can then pass in either a password and <code>password_confirmation</code> arguments, or just the <code>password</code> argument alongside setting the validations argument to <code>false</code>:</p>
+<ul>
+<li><code>err</code> — Details any errors</li>
+<li><code>hash</code> — The resulting hash</li>
+</ul>
 
-<pre><code class="ruby">user = User.new(name: 'Davey', password: 'password', password_confirmation: 'password')
-user.save
+<p>This will automatically generate a salt, and use a cost of 10.</p>
+
+<p>You can generate a salt manually using <code>bcrypt.genSalt()</code>:</p>
+
+<pre><code class="js">var bcrypt = require('bcrypt');
+
+bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash("password", salt, function(err, hash) {
+        // Store the hash
+    });
+});
 </code></pre>
 
-<p>Or without confirmation:</p>
+<p>Here we create a salt with a <code>cost</code> of <code>10</code>, and call the <code>bcrypt.hash()</code> function inside the <code>bcrypt.getSalt()</code> callback.</p>
 
-<pre><code class="ruby">user = User.new(name: 'Davey', password: 'password', validations: false)
-user.save
+<h4>Verifying a Password</h4>
+
+<p>To verify a password asynchronously, we call <code>bcrypt.compare()</code>:</p>
+
+<pre><code class="js">bcrypt.compare("password", hash, function(err, valid) {
+    if (valid == true) {
+        // password matches
+    } else if (valid == false) {
+        // password does not match
+    }
+});
 </code></pre>
 
-<h3>Verifying a Password</h3>
+<p>We pass in the user supplied password, and the stored hash, as well as a callback that will recieve two arguments:</p>
 
-<p>Then to authenticate, you can either call the authenticate method:</p>
+<ul>
+<li><code>err</code> — Any errors</li>
+<li><code>valid</code> — Whether the password was valid or not</li>
+</ul>
 
-<pre><code class="ruby">user.authenticate('password')
+<h3>Synchronous Usage</h3>
+
+<h4>Hashing a Password</h4>
+
+<p>To hash a password synchronously, do the following:</p>
+
+<pre><code class="js">var bcrypt = require('bcrypt');
+
+var hash = bcrypt.hashSync("password", 10);
 </code></pre>
 
-<p>Or you can do it when retrieving the user from the database:</p>
+<p>Here we pass in the password, and a <code>cost</code> of <code>10</code>. The salt is generated automatically. The resulting hash is returned directly.</p>
 
-<pre><code class="ruby">User.find_by(name: 'Davey').try(:authenticate, 'password')
+<p>We can also generate the salt manually, supplying the <code>cost</code> to the <code>bcrypt.genSaltSync()</code> function, and then passing the resulting <code>salt</code> to
+<code>bcrypt.hashSync()</code> in place of the <code>cost</code>.</p>
+
+<pre><code class="js">var bcrypt = require('bcrypt');
+
+var salt = bcrypt.genSaltSync(10);
+var hash = bcrypt.hashSync("password", salt);
 </code></pre>
 
-<p>This method will only return a valid user object if the password is correct, otherwise it will return <code>false</code>.</p>
+<h4>Verifying a Password</h4>
+
+<p>To verify a password synchronously we simply pass the password, and stored hash to <code>bcrypt.compareSync()</code>. A boolean is returned:</p>
+
+<pre><code class="js">var valid = bcrypt.compareSync("password", hash);
+if (valid == true) {
+    // password matches
+} else if (valid == false) {
+    // password does not match
+}
+</code></pre>
 
         </div>
     </article>
