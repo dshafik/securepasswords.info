@@ -10,6 +10,7 @@ gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
 sponsor: "Engine Yard"
 sponsor_url: "https://www.engineyard.com"
 sponsor_twitter: EngineYard
+sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png"
 ---
 
 With PHP 5.5, a new [password extension](http://php.net/password) was added to that makes password security easy by default.

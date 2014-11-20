@@ -11,6 +11,7 @@ gravatar: "3cf7a8ab0bccee5b65d39b50a170a555"
 sponsor: "Roave"
 sponsor_url: "https://roave.com"
 sponsor_twitter: RoaveTeam
+sponsor_image: "https://roave.com/themes/ruby-on-roave/images/roave-logo-tiny.svg"
 ---
 
 Zend Framework 2 ships with the `Zend\Crypt` component, which can be used to generate secure password hashes.

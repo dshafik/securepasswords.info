@@ -10,6 +10,7 @@ gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
 sponsor: "Engine Yard"
 sponsor_url: "https://www.engineyard.com"
 sponsor_twitter: EngineYard
+sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png"
 ---
 For Ruby, we use the [bcrypt gem](https://rubygems.org/gems/bcrypt) which allows us to hash and validate passwords.
 
