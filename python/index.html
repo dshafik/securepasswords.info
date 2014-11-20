@@ -36,7 +36,67 @@
             <h1>Python</h1>
         </header>
         <div>
-            <p><strong>Python</strong></p>
+            <p>There are many Python libraries available that deal with hashing and security, but for managing passwords, one of the 
+most popular is <a href="https://pythonhosted.org/passlib/">passlib</a>. Passlib provides a simple interface on top of a number of 
+different hashing backends.</p>
+
+<p>This guide will cover bcrypt which is <em>usually</em> the best option available.</p>
+
+<h2>Installation</h2>
+
+<p>Passlib supports 4 different bcrypt backends and provides its own pure-python fallback implementation (which should 
+probably not be used in production). Passlib will use the first one of the following:</p>
+
+<ol>
+<li>bcrypt</li>
+<li>py-bcrypt</li>
+<li>bcryptor</li>
+<li>stdlib's crypt.crypt() on OSs that support bcrypt</li>
+<li>passlib's fallback implementation (if enabled)</li>
+</ol>
+
+<p>Install a backend and passlib using pip (or easy_install).</p>
+
+<pre><code class="sh">$ pip install bcrypt
+$ pip install passlib
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Passlib's hashing interface exposes two main methods</p>
+
+<ul>
+<li><a href="https://pythonhosted.org/passlib/lib/passlib.hash.bcrypt.html"><code>passlib.hash.bcrypt.encrypt(&lt;string&gt;[,salt=&lt;salt&gt;, rounds=12, ident='2a'])</code></a>
+Create a new password hash</li>
+<li><a href="https://pythonhosted.org/passlib/lib/passlib.hash.bcrypt.html"><code>passlib.hash.bcrypt.verify(&lt;string&gt;, &lt;hash&gt;)</code></a>
+Confirm a given password matches the hash</li>
+</ul>
+
+<h3>Hashing a Password</h3>
+
+<p>To hash a password, do the following:</p>
+
+<pre><code class="python">from passlib.hash import bcrypt
+
+hash = bcrypt.encrypt("my_password")
+</code></pre>
+
+<p>The encrypt method takes a number of optional named params, most importantly rounds, which is an integer between 1 and 31 (inclusive) which
+dictate how long it takes to hash a password. By default, the library will set this value to 12, but you can tune this up and down
+based on the hardware your application is running on.</p>
+
+<p>You also have the option of setting a salt. <strong>NOT</strong> providing a salt will cause the library to generate a cryptographically secure random
+salt for you, which is a very good thing.</p>
+
+<h3>Verifying a Password</h3>
+
+<p>To verify a password, we do:</p>
+
+<pre><code class="python">if (bcrypt.verify("my_password", hash)):
+    # Password matches
+else:
+    # Password doesn't match
+</code></pre>
 
         </div>
     </article>
@@ -47,15 +107,24 @@
     <footer id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
-                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">SecurePasswords.info</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://securepasswords.info" property="cc:attributionName" rel="cc:attributionURL">Davey Shafik</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/dshafik/securepasswords.info" rel="dct:source">http://github.com/dshafik/securepasswords.info</a>.
+                <div class="col-sm-7 col-xs-12">
+                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">SecurePasswords.info</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/dshafik/securepasswords.info" rel="dct:source">https://github.com/dshafik/securepasswords.info</a>.
                 </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right">
-                        <li><a href="">Home</a></li>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
-                    </ul>
+                <div class="col-sm-3 col-sm-push-2 col-xs-12 text-center">
+					<div class="row">
+						<ul>
+                        	<li><a class="btn btn-default" href="">Home</a></li>
+							<li><a class="btn btn-default" href="/about">About</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+						</ul>
+					</div>
+					<div class="row">
+						<p class="text-center" style="margin-top: 1em;">
+							Sponsored By
+							<br>
+							<a href="https://www.engineyard.com"><img src="themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
+						</p>
+					</div>
                 </div>
             </div>
         </div>
