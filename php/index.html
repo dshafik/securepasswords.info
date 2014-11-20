@@ -96,7 +96,7 @@ if (password_verify($_POST['password'], $user-&gt;password)) {
 <pre><code class="php">&lt;?php
 $user = User::findByUsername($username);
 if (password_verify($_POST['password'], $user-&gt;password)) {
-        if (password_needs_rehash($user-&gt;password, PASSWORD_DEFAULT, ['cost' =&gt; 12])) {
+    if (password_needs_rehash($user-&gt;password, PASSWORD_DEFAULT, ['cost' =&gt; 12])) {
         $user-&gt;updatePassword($_POST['password']);
     }
 } else {
