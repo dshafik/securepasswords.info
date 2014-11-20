@@ -6,6 +6,7 @@ if [ $# -ne 1 ]; then
 fi
 
 sculpin generate --env=prod
+sculpin install
 
 git stash
 git checkout gh-pages
