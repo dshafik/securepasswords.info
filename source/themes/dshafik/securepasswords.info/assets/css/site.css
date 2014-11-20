@@ -76,6 +76,10 @@ ul.social-share li a:hover {
   color: #fff;
 }
 
+#footer a.btn {
+	color: #000;
+}
+
 #footer a:hover {
   color: #c52d2f;
 }
