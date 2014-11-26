@@ -61,7 +61,7 @@
 
 <pre><code class="ruby">require ‘bcrypt’
 
-hash = BCrypt::Password.create(password, :cost =&gt; 11)
+hashed_password = BCrypt::Password.create(password, :cost =&gt; 11)
 </code></pre>
 
 <p>You can pass in an options hash including an option to set the <code>cost</code>.</p>
@@ -70,7 +70,7 @@ hash = BCrypt::Password.create(password, :cost =&gt; 11)
 
 <p>For validation, you can use the comparison operator:</p>
 
-<pre><code class="ruby">if hash == password then
+<pre><code class="ruby">if hashed_password == password then
      # Password matches
 else
      # Password does not match
