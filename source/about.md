@@ -21,3 +21,4 @@ This site was created as an additional resource to accompany a series of blog po
 
 - [Password Security Part 1: By The Numbers](https://blog.engineyard.com/2014/password-security-part-1)
 - [Password Security Part 2: Using Bcrypt](https://blog.engineyard.com/2014/password-security-part-2)
+- [Password Security Part 3: Anatomy of a Hash](https://blog.engineyard.com/2014/password-security-part-3)
