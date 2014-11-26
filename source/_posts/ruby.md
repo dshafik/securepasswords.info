@@ -41,7 +41,7 @@ The bcrypt gem is super simple, with a single method for generating hashes.
 ```ruby
 require ‘bcrypt’
 
-hash = BCrypt::Password.create(password, :cost => 11)
+hashed_password = BCrypt::Password.create(password, :cost => 11)
 ```
 
 You can pass in an options hash including an option to set the `cost`.
@@ -51,7 +51,7 @@ You can pass in an options hash including an option to set the `cost`.
 For validation, you can use the comparison operator:
 
 ```ruby
-if hash == password then
+if hashed_password == password then
      # Password matches
 else
      # Password does not match
