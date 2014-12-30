@@ -1,8 +1,10 @@
 <article class="language">
     <div class="col-xs-12 col-sm-4 col-md-3">
 		<title>{{ post.title }}</title>
-		<a href="{{ site.url }}{{ post.url }}" style="background-color: #{{ post.meta.background }};">
-			<h2 class="text-center" style="color: #{{ post.meta.color }};">{{ post.tile|default(post.title) }}</h2>
-		</a>
+		<form action="{{ site.url }}{{ post.url }}">
+			<button style="background-color: #{{ post.meta.background }};" type="submit">
+				<h2 class="text-center" style="color: #{{ post.meta.color }};">{{ post.tile|default(post.title) }}</h2>
+			</button>
+		</form>
     </div>
 </article>
