@@ -2,7 +2,7 @@
 title: "Password Validator for PHP"
 layout: "post"
 color: "fff"
-background: "F26522"
+background: "ec6b4c"
 author: "Jeremy Kendall"
 author_url: "http://about.me/jeremykendall"
 author_twitter: JeremyKendall
