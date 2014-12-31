@@ -1,6 +1,6 @@
 {% extends "index" %}
 {% block content_wrapper %}
-    <article class="col-xs-10 col-sm-push-2">
+    <article class="col-xs-12 col-sm-10 col-sm-push-2">
         <header>
             <h1>{{ page.title }}</h1>
         </header>
@@ -8,7 +8,7 @@
             {{ page.blocks.content|raw }}
         </div>
     </article>
-    <div class="byline col-sm-pull-10 col-xs-2">
+    <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
         <div class="author text-center">
             <h4>{{ page.author }}</h4>
             {% if page.author_url %}
