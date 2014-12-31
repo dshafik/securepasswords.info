@@ -1,6 +1,6 @@
 {% extends "index" %}
 {% block content_wrapper %}
-    <article>
+    <article class="col-xs-10 col-sm-push-2">
         <header>
             <h1>{{ page.title }}</h1>
         </header>
@@ -8,4 +8,38 @@
             {{ page.blocks.content|raw }}
         </div>
     </article>
+    <div class="byline col-sm-pull-10 col-xs-2">
+        <div class="author text-center">
+            <h4>{{ page.author }}</h4>
+            {% if page.author_url %}
+            <a class="author-url" href="{{ page.author_url }}">
+                <img src="https://secure.gravatar.com/avatar/{{ page.gravatar }}" alt="{{ page.author }}">
+            </a>
+            {% else %}
+            <img src="https://secure.gravatar.com/avatar/{{ page.gravatar }}" alt="{{ page.author }}">
+            {% endif %}
+            {% if page.author_twitter %}
+                <a class="author-twitter" href="https://twitter.com/{{ page.author_twitter }}">
+                    <i class="fa fa-twitter"></i> @{{ page.author_twitter }}
+                </a>
+            {% endif %}
+        </div>
+        {% if page.sponsor %}
+            <div class="sponsor text-center">
+                <h5>Sponsored By</h5>
+                <a class="sponsor-url" href="{{ page.sponsor_url }}" title="{{ page.sponsor }}">
+                    {% if page.sponsor_image %}
+                        <img src="{{ page.sponsor_image }}">
+                    {% else %}
+                        {{ page.sponsor }}
+                    {% endif %}
+                </a>
+                {% if page.sponsor_twitter %}
+                    <a class="sponsor-twitter" href="https://twitter.com/{{ page.sponsor_twitter }}">
+                        <i class="fa fa-twitter"></i> @{{ page.sponsor_twitter }}
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

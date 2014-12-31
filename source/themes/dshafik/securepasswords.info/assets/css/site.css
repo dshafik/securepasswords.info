@@ -60,6 +60,26 @@ ul.social-share li a:hover {
   opacity: 0.5;
 }
 
+.byline {
+  background-color: #f8f8f8;
+  padding: 15px;
+  margin-top: 25px;
+}
+
+.byline a {
+  display: block;
+  text-decoration: none;
+}
+
+.byline .author img {
+  border: 5px solid #404040;
+  border-radius: 50px;
+}
+
+.byline img {
+  max-width: 100%;
+}
+
 #footer {
   margin-top: 30px;
   padding-top: 30px;
