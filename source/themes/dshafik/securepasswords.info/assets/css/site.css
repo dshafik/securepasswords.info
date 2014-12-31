@@ -73,6 +73,8 @@ ul.social-share li a:hover {
 
 .byline .author img {
   border: 5px solid #404040;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
   border-radius: 50px;
 }
 
