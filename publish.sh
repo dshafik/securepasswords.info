@@ -20,3 +20,4 @@ git push origin --all
 
 git checkout master
 git stash pop
+sculpin install
