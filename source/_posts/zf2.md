@@ -1,6 +1,6 @@
 ---
 title: "Zend Framework 2"
-tile: "ZF 2"
+tile: "ZF2"
 layout: "post"
 color: "fff"
 background: "59a93a"
