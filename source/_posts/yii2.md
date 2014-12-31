@@ -20,13 +20,17 @@ Yii2 Framework ships with support for `bcrypt` and `password_hash` support via i
 Yii2 security comes installed with a yii2 composer install, nothing special is required.
 
 ## Usage
-By default Yii2 uses bcrypt for hashing, but if you have php >= 5.5.0 you can use password_hash the following in your config file.
+By default Yii2 uses bcrypt for hashing, but if you have php >= 5.5.0 you can use password_hash the following in your config/web.php file.
 
 ```php
-$config = [
+<?php
+return [
+  ...
   'components' => [
+    ...
     'security' => [
       'passwordHashStrategy' => 'password_hash'
+    ...
     ]
   ]
 ];
