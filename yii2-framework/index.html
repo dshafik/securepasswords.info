@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SecurePasswords.info | Home</title>
+    <title>SecurePasswords.info | Yii2 Framework</title>
     <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/themes/dshafik/securepasswords.info/assets/css/site.css" rel="stylesheet">
@@ -15,10 +15,10 @@
 </head><!--/head-->
 <body>
     <header id="header">
-				<nav class="navbar navbar-inverse" role="banner">
+		        <nav class="navbar navbar-inverse" style="background-color: #4e8acc;" role="banner">
 		            <div class="container">
                 <h1 class="navbar-header">
-					                    <a class="navbar-brand" href="/">SecurePasswords.info</a>
+					                    <a class="navbar-brand" style="color: #fff !important;" href="/">SecurePasswords.info</a>
 					                </h1>
                 <ul class="social-share pull-right">
                     <li><a href="https://twitter.com/securepasswrds"><i class="fa fa-twitter"></i></a></li>
@@ -31,79 +31,71 @@
     <section>
         <div class="container">
             <div class="row">
-					<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Node.js</title>
-		<form action="/nodejs">
-			<button style="background-color: #6fb424;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Node.js</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Password Validator for PHP</title>
-		<form action="/password-validator-for-php">
-			<button style="background-color: #ec6b4c;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Password Validator for PHP</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>PHP</title>
-		<form action="/php">
-			<button style="background-color: #757eb1;" type="submit">
-				<h2 class="text-center" style="color: #fff;">PHP</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Python</title>
-		<form action="/python">
-			<button style="background-color: #1a3655;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Python</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Ruby on Rails</title>
-		<form action="/ruby-on-rails">
-			<button style="background-color: #9a1d26;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Ruby on Rails</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Ruby</title>
-		<form action="/ruby">
-			<button style="background-color: #be2322;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Ruby</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Yii2 Framework</title>
-		<form action="/yii2-framework">
-			<button style="background-color: #4e8acc;" type="submit">
-				<h2 class="text-center" style="color: #fff;">Yii2</h2>
-			</button>
-		</form>
-    </div>
-</article>	<article class="language">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-		<title>Zend Framework 2</title>
-		<form action="/zend-framework-2">
-			<button style="background-color: #59a93a;" type="submit">
-				<h2 class="text-center" style="color: #fff;">ZF2</h2>
-			</button>
-		</form>
-    </div>
-</article>            </div>
+				    <article class="col-xs-12 col-sm-10 col-sm-push-2">
+        <header>
+            <h1>Yii2 Framework</h1>
+        </header>
+        <div>
+            <p>Yii2 Framework ships with support for <a href="http://php.net/crypt"><code>crypt()</code></a> and <a href="http://php.net/password"><code>ext/password</code></a> via it's security component.</p>
+
+<h2>Installation</h2>
+
+<p>Yii2 security comes installed with a yii2 composer install, nothing special is required.</p>
+
+<h2>Usage</h2>
+
+<p>By default Yii2 uses <code>crypt()</code> for hashing, but if you have PHP >= 5.5.0 we recommend you use <code>ext/password</code> by adding the following in your <code>config/web.php</code> file.</p>
+
+<pre><code class="php">&lt;?php
+return [
+  ...
+  'components' =&gt; [
+    ...
+    'security' =&gt; [
+      'passwordHashStrategy' =&gt; 'password_hash'
+    ...
+    ]
+  ]
+];
+</code></pre>
+
+<p>For more security documentation please visit <a href="http://stuff.cebe.cc/yii2docs/guide-security-passwords.html">Yii2 Security - Passwords</a></p>
+
+<h2>Hashing passwords</h2>
+
+<pre><code class="php">$hash = Yii::$app-&gt;getSecurity()-&gt;generatePasswordHash($password);
+</code></pre>
+
+<h2>Verifying a password</h2>
+
+<pre><code class="php">if (Yii::$app-&gt;getSecurity()-&gt;validatePassword($password, $hash)) {
+  // all good, logging user in
+} else {
+  // wrong password
+}
+</code></pre>
+
+        </div>
+    </article>
+    <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
+        <div class="author text-center">
+            <h4>Jason Ragsdale</h4>
+                        <img src="https://secure.gravatar.com/avatar/c33a23d256e895d5cc6898ea3051528c" alt="Jason Ragsdale">
+                                        <a class="author-twitter" href="https://twitter.com/Jasrags">
+                    <i class="fa fa-twitter"></i> @Jasrags
+                </a>
+                    </div>
+                    <div class="sponsor text-center">
+                <h5>Sponsored By</h5>
+                <a class="sponsor-url" href="http://www.yiiframework.com/" title="Yiisoft">
+                                            <img src="http://static.yiiframework.com/css/img/logo.png">
+                                    </a>
+                                    <a class="sponsor-twitter" href="https://twitter.com/yiiframework">
+                        <i class="fa fa-twitter"></i> @yiiframework
+                    </a>
+                            </div>
+            </div>
+            </div>
         </div>
     </section>
 
