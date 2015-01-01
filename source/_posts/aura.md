@@ -33,7 +33,7 @@ composer require "aura/auth:2.0.0-beta2"
 
 ## Usage
 
-In this example we are looking into authentication via database using pdo. The `Aura\Auth\Verifier\PasswordVerifier` class help you to make use of different type of hashing algorithms in PHP. You can pass `PASSWORD_BCRYPT` to make use of  [password_](http://php.net/password) functions or `md5`, `sha256` etc. It is recommended to make use of `PASSWORD_BCRYPT`.
+In this example we are looking into authentication via database using pdo. The `Aura\Auth\Verifier\PasswordVerifier` class help you to make use of different type of hashing algorithms in PHP. You can pass `PASSWORD_DEFAULT` to make use of  [password_](http://php.net/password) functions or `md5`, `sha256` etc. It is recommended to make use of `PASSWORD_DEFAULT`.
 
 ```php
 <?php
@@ -53,7 +53,7 @@ $cols = array(
 $from = 'users';
 $where = 'active = 1';
 
-$hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_BCRYPT);
+$hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
 
 $pdo_adapter = $auth_factory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
 ```
