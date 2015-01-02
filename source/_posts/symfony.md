@@ -67,7 +67,7 @@ $hashedPassword = $this->container->get('security.password_encoder')
 In **previous Symfony versions**, use the `security.encoder_factory` service:
 
 ```php
-$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
 $hashedPassword = $encoder->encodePassword($plainPassword, $user->getSalt());
 ```
 
@@ -86,7 +86,7 @@ $isValid = $this->container->get('security.password_encoder')
 In **previous Symfony versions**, use the `security.encoder_factory` service:
 
 ```php
-$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+$encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
 $isValid = $encoder->isPasswordValid($user->getPassword(), $plainPassword, $user->getSalt());
 ```
 
