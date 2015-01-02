@@ -9,7 +9,7 @@ gravatar: "9dc22dfc54bd9c666c72ebcd73d2fdd7"
 sponsor: "SensioLabs"
 sponsor_url: "https://sensiolabs.com"
 sponsor_twitter: sensiolabs
-sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/sensiolabs.png"
+sponsor_image: "/themes/dshafik/securepasswords.info/assets/images/sensiolabs.png"
 ---
 
 ## Installation
