@@ -16,8 +16,8 @@ sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/
 
 Symfony relies on PHP hashing algorithms to encode passwords. The recommended
 algorithm is called `bcrypt` and it's available in PHP 5.5+. If you are using
-an earlier PHP version, install the `password_compat` library in your projects 
-to enable `bcrypt` in PHP 5.3.17+ versions:
+an earlier PHP version, install the [password_compat](https://github.com/ircmaxell/password_compat)
+library in your projects to enable `bcrypt` in PHP 5.3.17+ versions:
 
 ```sh
 $ composer require ircmaxell/password_compat
