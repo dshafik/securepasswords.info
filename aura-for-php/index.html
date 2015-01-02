@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SecurePasswords.info | Aura for PHP</title>
+    <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/themes/dshafik/securepasswords.info/assets/css/site.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>     
+    <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+    <link rel="shortcut icon" href="/themes/dshafik/securepasswords.info/assets/images/ico/favicon.ico">
+</head><!--/head-->
+<body>
+    <header id="header">
+		        <nav class="navbar navbar-inverse" style="background-color: #656b78;" role="banner">
+		            <div class="container">
+                <h1 class="navbar-header">
+					                    <a class="navbar-brand" style="color: #fff !important;" href="/">SecurePasswords.info</a>
+					                </h1>
+                <ul class="social-share pull-right">
+                    <li><a href="https://twitter.com/securepasswrds"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="https://github.com/dshafik/securepasswords.info"><i class="fa fa-github-alt"></i></a></li>
+                </ul>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+    </header><!--/header-->
+
+    <section>
+        <div class="container">
+            <div class="row">
+				    <article class="col-xs-12 col-sm-10 col-sm-push-2">
+        <header>
+            <h1>Aura for PHP</h1>
+        </header>
+        <div>
+            <p>Aura.Auth provides authentication functionality and session tracking using various storage adapters. Currently supported are:</p>
+
+<ul>
+<li>Apache htpasswd files</li>
+<li>SQL tables via the PDO extension</li>
+<li>IMAP/POP/NNTP via the imap extension</li>
+<li>LDAP and Active Directory via the ldap extension</li>
+<li>OAuth via customized adapters</li>
+</ul>
+
+<p>It makes use of <a href="http://php.net/password">ext/password</a> in PHP 5.5+ or uses  <a href="https://packagist.org/packages/ircmaxell/password-compat">ircmaxell/password-compat</a> in earlier versions (<a href="http://securepasswords.info/php/">more here</a>)</p>
+
+<h2>Installation</h2>
+
+<p>You can either clone the repo <code>https://github.com/auraphp/Aura.Auth</code> and include the <code>autoload.php</code> file or install via <a href="https://getcomposer.org/">composer</a> as below.</p>
+
+<pre><code class="sh">composer require "aura/auth:2.0.0-beta2"
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>In this example we are looking into authentication via database using <a href="http://php.net/pdo">PDO</a>. The <code>Aura\Auth\Verifier\PasswordVerifier</code> class help you to make use of different type of hashing algorithms in PHP. You can pass <code>PASSWORD_DEFAULT</code> to make use of <a href="http://php.net/password"><code>ext/password</code></a> functions or <code>md5</code>, <code>sha256</code> etc. It is recommended you use of <code>PASSWORD_DEFAULT</code>.</p>
+
+<pre><code class="php">&lt;?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
+$auth = $auth_factory-&gt;newInstance();
+
+$pdo = new \PDO(...);
+$cols = array(
+    'username', // "AS username" is added by the adapter
+    'password', // "AS password" is added by the adapter
+    'email',
+    'fullname',
+    'website'
+);
+$from = 'users';
+$where = 'active = 1';
+
+$hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
+
+$pdo_adapter = $auth_factory-&gt;newPdoAdapter($pdo, $hash, $cols, $from, $where);
+</code></pre>
+
+<p>Assuming you have a database table as below:</p>
+
+<pre><code class="sql">CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL COMMENT 'Username',
+  `email` varchar(255) NOT NULL COMMENT 'Email',
+  `password` varchar(255) NOT NULL COMMENT 'Password',
+  `fullname` varchar(255) NOT NULL COMMENT 'Full name',
+  `website` varchar(255) DEFAULT NULL COMMENT 'Website',
+  `active` int(11) NOT NULL COMMENT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+
+<p>See more complex example using joins in <a href="https://github.com/auraphp/Aura.Auth">readme</a></p>
+
+<h2>Verifying a Password</h2>
+
+<p>The login service will verify and throw exceptions according to the error happened:</p>
+
+<pre><code class="php">$login_service = $auth_factory-&gt;newLoginService($pdo_adapter);
+try {
+    $login_service-&gt;login($auth, array(
+            'username' =&gt; $_POST['username'],
+            'password' =&gt; $_POST['password'],
+        )
+    );
+    echo "You are now logged into a new session.";
+} catch (\Aura\Auth\Exception\UsernameMissing $e) {
+    echo "The 'username' field is missing or empty.";
+} catch (\Aura\Auth\Exception\PasswordMissing $e) {
+    echo "The 'password' field is missing or empty.";
+} catch (\Aura\Auth\Exception\UsernameNotFound $e) {
+    echo "The username you entered was not found.";
+} catch (\Aura\Auth\Exception\MultipleMatches $e) {
+    echo "There is more than one account with that username.";
+} catch (\Aura\Auth\Exception\PasswordIncorrect $e) {
+    echo "The password you entered was incorrect.";
+} catch (\Aura\Auth\Exception\ConnectionFailed $e) {
+    echo "Cound not connect to IMAP or LDAP server.";
+    echo "This could be because the username or password was wrong,";
+    echo "or because the the connect operation itself failed in some way. ";
+    echo $e-&gt;getMessage();
+} catch (\Aura\Auth\Exception\BindFailed $e) {
+    echo "Cound not bind to LDAP server.";
+    echo "This could be because the username or password was wrong,";
+    echo "or because the the bind operations itself failed in some way. ";
+    echo $e-&gt;getMessage();
+}
+</code></pre>
+
+<h2>Maintaining Login State</h2>
+
+<h3>Resuming a Session</h3>
+
+<p>Like PHP, Aura.Auth does not start the session automatically (<a href="https://github.com/auraphp/Aura.Auth#resuming-a-session">more info</a>).</p>
+
+<p>If you need to check whether the user is logged in on the next request, you <em>must</em> either start the session via <a href="http://php.net/session_start"><code>session_start()</code></a>, or resume the service first before checking the Auth status:</p>
+
+<pre><code class="php">// start session
+session_start();
+
+// or use the service to resume any previously-existing session
+
+// $resume_service = $auth_factory-&gt;newResumeService($pdo_adapter);
+// $resume_service-&gt;resume($auth);
+
+echo $auth-&gt;getStatus();
+</code></pre>
+
+<h3>Logging Out</h3>
+
+<p>The same applies to logout, you should either call <code>session_start</code> or resume service before you try logout, otherwise session data will not be removed:</p>
+
+<pre><code class="php">session_start();
+$logout_service = $auth_factory-&gt;newLogoutService($pdo_adapter);
+$logout_service-&gt;logout($auth);
+
+if ($auth-&gt;isAnon()) {
+    echo "You are now logged out.";
+} else {
+    echo "Something went wrong; you are still logged in.";
+}
+</code></pre>
+
+<p>Depending upon the adapter methods, you can swap the adapters for convenience. Eg : <code>Aura\Auth\Adapter\PdoAdapter::logout</code> method does nothing, so you can pass a <code>Aura\Auth\Adapter\NullAdapter</code>. But it is not recommended.</p>
+
+<p>Checkout the full example code of the tutorial over  <a href="https://github.com/harikt/authentication-pdo-example">https://github.com/harikt/authentication-pdo-example</a></p>
+
+        </div>
+    </article>
+    <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
+        <div class="author text-center">
+            <h4>Hari KT</h4>
+                        <a class="author-url" href="http://harikt.com">
+                <img src="https://secure.gravatar.com/avatar/895c943fbd5beb697f6c2d7bf0c3b279" alt="Hari KT">
+            </a>
+                                        <a class="author-twitter" href="https://twitter.com/harikt">
+                    <i class="fa fa-twitter"></i> @harikt
+                </a>
+                    </div>
+                    <div class="sponsor text-center">
+                <h5>Sponsored By</h5>
+                <a class="sponsor-url" href="http://dflydev.com" title="Dflydev">
+                                            <img src="https://avatars0.githubusercontent.com/u/199259?v=3&amp;s=200">
+                                    </a>
+                                    <a class="sponsor-twitter" href="https://twitter.com/dflydev">
+                        <i class="fa fa-twitter"></i> @dflydev
+                    </a>
+                            </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7 col-xs-12">
+                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">SecurePasswords.info</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/dshafik/securepasswords.info" rel="dct:source">https://github.com/dshafik/securepasswords.info</a>.
+                </div>
+                <div class="col-sm-3 col-sm-push-2 col-xs-12 text-center">
+					<div class="row">
+						<ul>
+                        	<li><a class="btn btn-default" href="/">Home</a></li>
+							<li><a class="btn btn-default" href="/about">About</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+						</ul>
+					</div>
+					<div class="row">
+						<p class="text-center" style="margin-top: 1em;">
+							Sponsored By
+							<br>
+							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
+						</p>
+					</div>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+    <script src="/components/jquery/jquery-built.js"></script>
+    <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/components/highlightjs/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-743285-5', 'auto');
+	  ga('send', 'pageview');
+	</script>
+</body>
+</html>
