@@ -49,7 +49,7 @@ $hashedPassword = $encoder->encodePassword($plainPassword, $user->getSalt());
 ```
 
 `$user` is the object that represents the user and it must implement the
-`Symfony\Component\Security\Core\User\UserInterface` interface.
+`Symfony\Component\Security\Core\User\UserInterface` class.
 
 ### Verifying a Password
 
@@ -61,7 +61,7 @@ $isValid = $encoder->isPasswordValid($user->getPassword(), $plainPassword, $user
 ```
 
 `$user` is the object that represents the user and it must implement the
-`Symfony\Component\Security\Core\User\UserInterface` interface.
+`Symfony\Component\Security\Core\User\UserInterface` class.
 
 ## Resources
 
