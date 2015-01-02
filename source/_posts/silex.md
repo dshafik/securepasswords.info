@@ -15,7 +15,7 @@ sponsor_image: "/themes/dshafik/securepasswords.info/assets/images/sensiolabs.pn
 ## Installation
 
 Silex relies on PHP hashing algorithms to encode passwords. The recommended
-algorithm is called `bcrypt` and it's available in PHP 5.5+ via the
+algorithm is called `bcrypt` and is available in PHP 5.5+ via the
 [ext/password extension] [1]. If you are using an earlier PHP version, install
 the [password_compat] [2] library in your projects to enable `bcrypt` in PHP
 5.3.17+ versions:
