@@ -1,6 +1,10 @@
 {% extends "index" %}
 {% block content_wrapper %}
-    <article class="col-xs-12 col-sm-10 col-sm-push-2">
+	{% if page.author %}
+	<article class="col-xs-12 col-sm-10 col-sm-push-2">
+	{% else %}
+	<article class="col-xs-12">
+	{% endif %}
         <header>
             <h1>{{ page.title }}</h1>
         </header>
@@ -8,6 +12,7 @@
             {{ page.blocks.content|raw }}
         </div>
     </article>
+	{% if page.author %}
     <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
         <div class="author text-center">
             <h4>{{ page.author }}</h4>
@@ -42,4 +47,5 @@
             </div>
         {% endif %}
     </div>
+	{% endif %}
 {% endblock %}
