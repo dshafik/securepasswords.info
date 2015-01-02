@@ -27,7 +27,7 @@ $ composer require ircmaxell/password_compat
 ## Usage
 
 By default, Silex hashes passwords using the `sha512` algorithm. In order to 
-use `bcrypt`, override the default settings of `security.encoder.digest` 
+use `bcrypt`, override the default settings of the `security.encoder.digest`
 service:
 
 ```php
