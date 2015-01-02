@@ -1,8 +1,8 @@
 ---
-title: "Authentication library Aura.Auth"
+title: "Aura for PHP"
 layout: "post"
 color: "fff"
-background: "59a93a"
+background: "656b78"
 author: "Hari KT"
 author_url: "http://harikt.com"
 author_twitter: harikt
@@ -13,7 +13,7 @@ sponsor_twitter: dflydev
 sponsor_image: "https://avatars0.githubusercontent.com/u/199259?v=3&s=200"
 ---
 
-Aura.Auth provides authentication functionality and session tracking using various adapters. Currently supported are:
+Aura.Auth provides authentication functionality and session tracking using various storage adapters. Currently supported are:
 
 * Apache htpasswd files
 * SQL tables via the PDO extension
@@ -21,7 +21,7 @@ Aura.Auth provides authentication functionality and session tracking using vario
 * LDAP and Active Directory via the ldap extension
 * OAuth via customized adapters
 
-It makes use of built in PHP functions in PHP 5.5 or with the help of  [ircmaxell/password-compat](https://packagist.org/packages/ircmaxell/password-compat) as mentioned in [article](http://securepasswords.info/php/).
+It makes use of [ext/password](http://php.net/password) in PHP 5.5+ or uses  [ircmaxell/password-compat](https://packagist.org/packages/ircmaxell/password-compat) in earlier versions ([more here](http://securepasswords.info/php/))
 
 ## Installation
 
@@ -33,7 +33,7 @@ composer require "aura/auth:2.0.0-beta2"
 
 ## Usage
 
-In this example we are looking into authentication via database using pdo. The `Aura\Auth\Verifier\PasswordVerifier` class help you to make use of different type of hashing algorithms in PHP. You can pass `PASSWORD_DEFAULT` to make use of  [password_](http://php.net/password) functions or `md5`, `sha256` etc. It is recommended to make use of `PASSWORD_DEFAULT`.
+In this example we are looking into authentication via database using [PDO](http://php.net/pdo). The `Aura\Auth\Verifier\PasswordVerifier` class help you to make use of different type of hashing algorithms in PHP. You can pass `PASSWORD_DEFAULT` to make use of [`ext/password`](http://php.net/password) functions or `md5`, `sha256` etc. It is recommended you use of `PASSWORD_DEFAULT`.
 
 ```php
 <?php
@@ -58,7 +58,7 @@ $hash = new \Aura\Auth\Verifier\PasswordVerifier(PASSWORD_DEFAULT);
 $pdo_adapter = $auth_factory->newPdoAdapter($pdo, $hash, $cols, $from, $where);
 ```
 
-> Assuming you have a database table as below
+Assuming you have a database table as below:
 
 ```sql
 CREATE TABLE `users` (
@@ -75,9 +75,9 @@ CREATE TABLE `users` (
 
 See more complex example using joins in [readme](https://github.com/auraphp/Aura.Auth)
 
-## Login service
+## Verifying a Password
 
-Assuming your database `password` field being hashed with the corresponding algorithm passed to `PasswordVerifier`, the login service will verify and throw exceptions according to the error happened.
+The login service will verify and throw exceptions according to the error happened:
 
 ```php
 $login_service = $auth_factory->newLoginService($pdo_adapter);
@@ -111,9 +111,13 @@ try {
 }
 ```
 
-## Resume service
+## Maintaining Login State
 
-Like PHP, Aura.Auth doesnot start the session automatically, [read why here](https://github.com/auraphp/Aura.Auth#resuming-a-session). So `$_SESSION` will not be populated. If you need to check whether the user is logged in on the next request, you should either start the session via `session_start` or call the resume service first and then only check the `Auth` methods.
+### Resuming a Session
+
+Like PHP, Aura.Auth does not start the session automatically ([more info](https://github.com/auraphp/Aura.Auth#resuming-a-session)).
+
+If you need to check whether the user is logged in on the next request, you *must* either start the session via [`session_start()`](http://php.net/session_start), or resume the service first before checking the Auth status:
 
 ```php
 // start session
@@ -127,9 +131,9 @@ session_start();
 echo $auth->getStatus();
 ```
 
-## Logout service
+### Logging Out
 
-Same applies to logout, for session is not started you should either call `session_start` or resume service before you try logout. Else session data will not be removed.
+The same applies to logout, you should either call `session_start` or resume service before you try logout, otherwise session data will not be removed:
 
 ```php
 session_start();
