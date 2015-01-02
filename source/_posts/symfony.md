@@ -1,5 +1,5 @@
 ---
-title: "Password Validator for Symfony"
+title: "Symfony"
 layout: "post"
 color: "FFF"
 background: "222"
