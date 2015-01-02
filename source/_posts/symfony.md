@@ -53,19 +53,27 @@ security:
 
 ### Hashing a Password
 
-Make use of the `security.password_encoder` service:
+In **Symfony 2.6 or newer** versions, use the `security.password_encoder`
+service:
 
 ```php
-$encoded = $this->container->get('security.password_encoder')
+$hashedPassword = $this->container->get('security.password_encoder')
     ->encodePassword($user, $plainPassword);
 ```
 
 `$user` is the object that represents the user and it must implement the
 `Symfony\Component\Security\Core\User\UserInterface` interface.
 
+In **previous Symfony versions**, use the `security.encoder_factory` service:
+
+```php
+$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+$hashedPassword = $encoder->encodePassword($plainPassword, $user->getSalt());
+```
+
 ### Verifying a Password
 
-Make use of the `security.password_encoder` service:
+In **Symfony 2.6 or newer** versions, use the `security.password_encoder` service:
 
 ```php
 $isValid = $this->container->get('security.password_encoder')
@@ -74,6 +82,13 @@ $isValid = $this->container->get('security.password_encoder')
 
 `$user` is the object that represents the user and it must implement the
 `Symfony\Component\Security\Core\User\UserInterface` interface.
+
+In **previous Symfony versions**, use the `security.encoder_factory` service:
+
+```php
+$encoder = $this->get('security.encoder_factory')->getEncoder($user);
+$isValid = $encoder->isPasswordValid($user->getPassword(), $plainPassword, $user->getSalt());
+```
 
 ## Resources
 
