@@ -94,4 +94,4 @@ $isValid = $encoder->isPasswordValid($user->getPassword(), $plainPassword, $user
 
 * [Security Chapter](http://symfony.com/doc/current/book/security.html) of the
   official Symfony Book.
-* [Recipes about Symfony Security](http://symfony.com/doc/current/cookbook/security/index.html)
+* [Symfony Security tutorials](http://symfony.com/doc/current/cookbook/security/index.html)
