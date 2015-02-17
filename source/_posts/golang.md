@@ -9,7 +9,7 @@ author_twitter: "fntlnz"
 gravatar: "7b10b1839f3fded11e74a72dfb382b4c"
 ---
 
-Golang doesn't have a built-in bcrypt implementation but has an official implementation wrote by the core team
+Golang doesn't have a built-in bcrypt implementation but has an official implementation written by the core team
 which is available [here](https://github.com/golang/crypto/tree/master/bcrypt)
 
 ## Installation
