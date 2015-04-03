@@ -45,10 +45,18 @@ Each file starts with the meta-data:
 
 ```
 ---
-title: PHP
-layout: post
-color: fff
-background: 757eb1
+title: "PHP"
+layout: "post"
+color: "fff"
+background: "757eb1"
+author: "Davey Shafik"
+author_url: "http://daveyshafik.com"
+author_twitter: "dshafik"
+gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
+sponsor: "Engine Yard"
+sponsor_url: "https://www.engineyard.com"
+sponsor_twitter: EngineYard
+sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png"
 ---
 ```
 
@@ -56,7 +64,14 @@ background: 757eb1
 - layout: The layout to use (always post)
 - color: The text color for the tile on the homepage
 - background: The background color for the tile on the homepage
-
+- author: The author name (optional)
+- author_url: Authors URL (optional)
+- author_twitter: Authors Twitter handle (optional)
+- gravatar: Gravatar email hash (optional)
+- sponsor: Sponsor name (optional)
+- sponsor_url: Sponsor URL (optional)
+- sponsor_twitter: Sponsor Twitter handle (optional)
+- sponsor_image: Sponsor logo image (optional)
 
 ## Testing Your Changes
 
