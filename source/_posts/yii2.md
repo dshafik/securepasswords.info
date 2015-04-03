@@ -36,7 +36,7 @@ return [
 ];
 ```
 
-For more security documentation please visit [Yii2 Security - Passwords](http://stuff.cebe.cc/yii2docs/guide-security-passwords.html)
+For more security documentation please visit [Yii2 Security - Passwords](http://www.yiiframework.com/doc-2.0/guide-security-passwords.html)
 
 ## Hashing passwords
 
