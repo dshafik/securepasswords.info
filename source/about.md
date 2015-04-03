@@ -13,7 +13,7 @@ This site is sponsored by <a href="https://www.engineyard.com">Engine Yard</a>.
 
 We welcome contributions of any new language, or framework, as well as additions and corrections to exiting examples.
 
-Please read the [https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md](CONTRIBUTING) document for details.
+Please read the [CONTRIBUTING](https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md) document for details.
 
 ## Further Reading
 
