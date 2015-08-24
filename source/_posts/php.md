@@ -22,7 +22,7 @@ The password extension is enabled by default in PHP 5.5+. If you are not yet usi
 To install password_compat, you can use composer:
 
 ```sh
-$ composer require ircmaxell/password_compat
+$ composer require ircmaxell/password-compat
 ```
 
 ## Usage
