@@ -7,8 +7,6 @@ A polyglot repo of [examples for using secure passwords](http://securepasswords.
 
 This site is maintained by [Davey Shafik](http://twitter.com/dshafik) and is built using [Sculpin](https://sculpin.io).
 
-This site is sponsored by [Engine Yard](https://www.engineyard.com).
-
 ## Contributing
 
 We welcome contributions of any new language, or framework, as well as additions and corrections to exiting examples.

@@ -7,10 +7,6 @@ author: "Davey Shafik"
 author_url: "http://daveyshafik.com"
 author_twitter: "dshafik"
 gravatar: "fee39f0c0ffb29d9ac21607ed188be6b"
-sponsor: "Engine Yard"
-sponsor_url: "https://www.engineyard.com"
-sponsor_twitter: EngineYard
-sponsor_image: "http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png"
 ---
 
 Node.js has multiple packages available that provide bcrypt, the most popular is a wrapper around the OpenBSD C library.
