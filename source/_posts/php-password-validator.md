@@ -67,11 +67,10 @@ if ($result->isValid()) {
 ```
 
 If your application requires options other than the `password_hash` defaults,
-you can set both the `salt` and `cost` options with `PasswordValidator::setOptions()`.
+you can set the `cost` option with `PasswordValidator::setOptions()`
 
 ``` php
 $options = array(
-    'salt' => 'SettingYourOwnSaltIsNotTheBestIdea',
     'cost' => 11,
 );
 $validator->setOptions($options);
@@ -175,7 +174,7 @@ class UserDao implements StorageInterface
     {
         $sql = 'UPDATE users SET password = :password WHERE username = :identity';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(array('password' => $password, 'username' => $identity));
+        $stmt->execute(array('password' => $password, 'identity' => $identity));
     }
 }
 ```
