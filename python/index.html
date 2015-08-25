@@ -42,7 +42,7 @@ different hashing backends.</p>
 
 <p>This guide will cover bcrypt which is <em>usually</em> the best option available.</p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>Passlib supports 4 different bcrypt backends and provides its own pure-python fallback implementation (which should 
 probably not be used in production). Passlib will use the first one of the following:</p>
@@ -61,7 +61,7 @@ probably not be used in production). Passlib will use the first one of the follo
 $ pip install passlib
 </code></pre>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 
 <p>Passlib's hashing interface exposes two main methods</p>
 
@@ -72,7 +72,7 @@ Create a new password hash</li>
 Confirm a given password matches the hash</li>
 </ul>
 
-<h3>Hashing a Password</h3>
+<h3 id="hashing-a-password">Hashing a Password</h3>
 
 <p>To hash a password, do the following:</p>
 
@@ -88,7 +88,7 @@ based on the hardware your application is running on.</p>
 <p>You also have the option of setting a salt. <strong>NOT</strong> providing a salt will cause the library to generate a cryptographically secure random
 salt for you, which is a very good thing.</p>
 
-<h3>Verifying a Password</h3>
+<h3 id="verifying-a-password">Verifying a Password</h3>
 
 <p>To verify a password, we do:</p>
 
@@ -126,15 +126,8 @@ else:
 						<ul>
                         	<li><a class="btn btn-default" href="/">Home</a></li>
 							<li><a class="btn btn-default" href="/about">About</a></li>
-							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">Contribute</a></li>
 						</ul>
-					</div>
-					<div class="row">
-						<p class="text-center" style="margin-top: 1em;">
-							Sponsored By
-							<br>
-							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
-						</p>
 					</div>
                 </div>
             </div>

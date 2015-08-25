@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SecurePasswords.info | About</title>
+    <title>SecurePasswords.info | Laravel</title>
     <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/themes/dshafik/securepasswords.info/assets/css/site.css" rel="stylesheet">
@@ -15,10 +15,10 @@
 </head><!--/head-->
 <body>
     <header id="header">
-				<nav class="navbar navbar-inverse" role="banner">
+		        <nav class="navbar navbar-inverse" style="background-color: #f4645f;" role="banner">
 		            <div class="container">
                 <h1 class="navbar-header">
-					                    <a class="navbar-brand" href="/">SecurePasswords.info</a>
+					                    <a class="navbar-brand" style="color: #fff !important;" href="/">SecurePasswords.info</a>
 					                </h1>
                 <ul class="social-share pull-right">
                     <li><a href="https://twitter.com/securepasswrds"><i class="fa fa-twitter"></i></a></li>
@@ -31,33 +31,85 @@
     <section>
         <div class="container">
             <div class="row">
-						<article class="col-xs-12">
+						<article class="col-xs-12 col-sm-10 col-sm-push-2">
 	        <header>
-            <h1>About</h1>
+            <h1>Laravel</h1>
         </header>
         <div>
-            <p>A polyglot repo of <a href="http://securepasswords.info/">examples for using secure passwords</a> (typically bcrypt).</p>
+            <p>Laravel is coming out of the box with a very simple authentication. The authentication config file is located at <code>app/config/auth.php</code> (v4) or <code>config/auth.php</code> (v5) and by default it ships with a <code>User</code> model in <code>app/models</code> (v4) or <code>app</code> (v5) which can be used with the Eloquent authentication driver.</p>
 
-<p>This site is maintained by <a href="http://twitter.com/dshafik">Davey Shafik</a> and is built using <a href="https://sculpin.io">Sculpin</a>.</p>
+<h2 id="usage">Usage</h2>
 
-<h2 id="contributing">Contributing</h2>
+<p>When you want to generate a new password, you can use the Laravel <code>Hash</code> class.</p>
 
-<p>We welcome contributions of any new language, or framework, as well as additions and corrections to exiting examples.</p>
+<pre><code class="php">$password = Hash::make('secret');
+</code></pre>
 
-<p>Please read the <a href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> document for details.</p>
+<h3 id="password-verifying">Password verifying</h3>
 
-<h2 id="further-reading">Further Reading</h2>
+<pre><code class="php">if (Hash::check('secret', $hashedPassword))
+{
+    // Matched!
+}
+</code></pre>
 
-<p>This site was created as an additional resource to accompany a series of blog posts:</p>
+<h3 id="password-rehashing">Password rehashing</h3>
 
-<ul>
-<li><a href="https://blog.engineyard.com/2014/password-security-part-1">Password Security Part 1: By The Numbers</a></li>
-<li><a href="https://blog.engineyard.com/2014/password-security-part-2">Password Security Part 2: Using Bcrypt</a></li>
-<li><a href="https://blog.engineyard.com/2014/password-security-part-3">Password Security Part 3: Anatomy of a Hash</a></li>
-</ul>
+<pre><code class="php">if (Hash::needsRehash($hashed))
+{
+    $hashed = Hash::make('secret');
+}
+</code></pre>
+
+<h3 id="authenticating-users">Authenticating Users</h3>
+
+<p>You can log a user into your application using the <code>Auth::attempt</code> method.</p>
+
+<pre><code class="php">if(Auth::attempt(['username' =&gt; $username, 'password' =&gt; $password]))
+{
+    // Works
+}
+else
+{
+    // Don't work
+}
+</code></pre>
+
+<p>It is also possible to add extra conditions</p>
+
+<pre><code class="php">if(Auth::attempt(['username' =&gt; $username, 'password' =&gt; $password, 'active' =&gt; 1]))
+{
+    // Works
+}
+</code></pre>
+
+<h3 id="hash-strength-increasing">Hash strength increasing</h3>
+
+<p>To increase the hash strength of the Bcrypt hash, you can change the <code>rounds</code> value</p>
+
+<pre><code class="php">$password = Hash::make('secret', ['rounds' =&gt; 12]);
+</code></pre>
+
+<h3 id="protecting-routes">Protecting Routes</h3>
+
+<pre><code class="php">// Only authenticated users (v5 and v4)
+Route::get('/profile', ['middleware' =&gt; 'auth', 'uses' =&gt; 'ProfileController@getIndex']);
+Route::get('/profile', ['uses' =&gt; 'ProfileController@getIndex'])-&gt;before('auth');
+
+// All users
+Route::get('/profile', ['uses' =&gt; 'ProfileController@getIndex']);
+</code></pre>
 
         </div>
     </article>
+	    <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
+        <div class="author text-center">
+            <h4>nickurt</h4>
+                        <a class="author-url" href="http://github.com/nickurt">
+                <img src="https://secure.gravatar.com/avatar/" alt="nickurt">
+            </a>
+                                </div>
+            </div>
 	            </div>
         </div>
     </section>

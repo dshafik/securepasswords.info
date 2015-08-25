@@ -38,20 +38,20 @@
         <div>
             <p>Node.js has multiple packages available that provide bcrypt, the most popular is a wrapper around the OpenBSD C library.</p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>Installation is done with npm:</p>
 
 <pre><code class="sh">$ npm install bcrypt
 </code></pre>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 
 <p>The package allows for both asynchronous (recommended) and synchronous usage.</p>
 
-<h3>Asynchronous Usage</h3>
+<h3 id="asynchronous-usage">Asynchronous Usage</h3>
 
-<h4>Hashing a Password</h4>
+<h4 id="hashing-a-password">Hashing a Password</h4>
 
 <p>To hash a password asynchronously, we call <code>bcrypt.hash()</code>:</p>
 
@@ -84,7 +84,7 @@ bcrypt.genSalt(10, function(err, salt) {
 
 <p>Here we create a salt with a <code>cost</code> of <code>10</code>, and call the <code>bcrypt.hash()</code> function inside the <code>bcrypt.getSalt()</code> callback.</p>
 
-<h4>Verifying a Password</h4>
+<h4 id="verifying-a-password">Verifying a Password</h4>
 
 <p>To verify a password asynchronously, we call <code>bcrypt.compare()</code>:</p>
 
@@ -104,9 +104,9 @@ bcrypt.genSalt(10, function(err, salt) {
 <li><code>valid</code> — Whether the password was valid or not</li>
 </ul>
 
-<h3>Synchronous Usage</h3>
+<h3 id="synchronous-usage">Synchronous Usage</h3>
 
-<h4>Hashing a Password</h4>
+<h4 id="hashing-a-password">Hashing a Password</h4>
 
 <p>To hash a password synchronously, do the following:</p>
 
@@ -126,7 +126,7 @@ var salt = bcrypt.genSaltSync(10);
 var hash = bcrypt.hashSync("password", salt);
 </code></pre>
 
-<h4>Verifying a Password</h4>
+<h4 id="verifying-a-password">Verifying a Password</h4>
 
 <p>To verify a password synchronously we simply pass the password, and stored hash to <code>bcrypt.compareSync()</code>. A boolean is returned:</p>
 
@@ -150,15 +150,6 @@ if (valid == true) {
                     <i class="fa fa-twitter"></i> @dshafik
                 </a>
                     </div>
-                    <div class="sponsor text-center">
-                <h5>Sponsored By</h5>
-                <a class="sponsor-url" href="https://www.engineyard.com" title="Engine Yard">
-                                            <img src="http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png">
-                                    </a>
-                                    <a class="sponsor-twitter" href="https://twitter.com/EngineYard">
-                        <i class="fa fa-twitter"></i> @EngineYard
-                    </a>
-                            </div>
             </div>
 	            </div>
         </div>
@@ -175,15 +166,8 @@ if (valid == true) {
 						<ul>
                         	<li><a class="btn btn-default" href="/">Home</a></li>
 							<li><a class="btn btn-default" href="/about">About</a></li>
-							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">Contribute</a></li>
 						</ul>
-					</div>
-					<div class="row">
-						<p class="text-center" style="margin-top: 1em;">
-							Sponsored By
-							<br>
-							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
-						</p>
 					</div>
                 </div>
             </div>

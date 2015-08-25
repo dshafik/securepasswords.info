@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SecurePasswords.info | Yii2 Framework</title>
+    <title>SecurePasswords.info | Silex</title>
     <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/themes/dshafik/securepasswords.info/assets/css/site.css" rel="stylesheet">
@@ -15,10 +15,10 @@
 </head><!--/head-->
 <body>
     <header id="header">
-		        <nav class="navbar navbar-inverse" style="background-color: #4e8acc;" role="banner">
+		        <nav class="navbar navbar-inverse" style="background-color: #4353CD;" role="banner">
 		            <div class="container">
                 <h1 class="navbar-header">
-					                    <a class="navbar-brand" style="color: #fff !important;" href="/">SecurePasswords.info</a>
+					                    <a class="navbar-brand" style="color: #FFF !important;" href="/">SecurePasswords.info</a>
 					                </h1>
                 <ul class="social-share pull-right">
                     <li><a href="https://twitter.com/securepasswrds"><i class="fa fa-twitter"></i></a></li>
@@ -33,65 +33,79 @@
             <div class="row">
 						<article class="col-xs-12 col-sm-10 col-sm-push-2">
 	        <header>
-            <h1>Yii2 Framework</h1>
+            <h1>Silex</h1>
         </header>
         <div>
-            <p>Yii2 Framework ships with support for <a href="http://php.net/crypt"><code>crypt()</code></a> and <a href="http://php.net/password"><code>ext/password</code></a> via it's security component.</p>
+            <h2 id="installation">Installation</h2>
 
-<h2 id="installation">Installation</h2>
+<p>Silex relies on PHP hashing algorithms to encode passwords. The recommended
+algorithm is called <code>bcrypt</code> and is available in PHP 5.5+ via the
+<a href="http://php.net/password">ext/password extension</a>. If you are using an earlier PHP version, install
+the <a href="https://github.com/ircmaxell/password_compat">password_compat</a> library in your projects to enable <code>bcrypt</code> in PHP
+5.3.17+ versions:</p>
 
-<p>Yii2 security comes installed with a yii2 composer install, nothing special is required.</p>
+<pre><code class="sh">$ composer require ircmaxell/password_compat
+</code></pre>
 
 <h2 id="usage">Usage</h2>
 
-<p>By default Yii2 uses <code>crypt()</code> for hashing, but if you have PHP >= 5.5.0 we recommend you use <code>ext/password</code> by adding the following in your <code>config/web.php</code> file.</p>
+<p>By default, Silex hashes passwords using the <code>sha512</code> algorithm. In order to 
+use <code>bcrypt</code>, override the default settings of the <code>security.encoder.digest</code>
+service:</p>
 
-<pre><code class="php">&lt;?php
-return [
-  ...
-  'components' =&gt; [
-    ...
-    'security' =&gt; [
-      'passwordHashStrategy' =&gt; 'password_hash'
-    ...
-    ]
-  ]
-];
+<pre><code class="php">use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
+
+$app['security.encoder.digest'] = $app-&gt;share(function ($app) {
+    // '10' is the cost used to hash passwords. Its value must be between 4 and 31
+    return new BCryptPasswordEncoder(10);
+});
 </code></pre>
 
-<p>For more security documentation please visit <a href="http://www.yiiframework.com/doc-2.0/guide-security-passwords.html">Yii2 Security - Passwords</a></p>
+<h3 id="hashing-a-password">Hashing a Password</h3>
 
-<h2 id="hashing-passwords">Hashing passwords</h2>
+<p>Use the <code>encodePassword()</code> method of the encoder related to the user:</p>
 
-<pre><code class="php">$hash = Yii::$app-&gt;getSecurity()-&gt;generatePasswordHash($password);
+<pre><code class="php">$encoder = $app['security.encoder_factory']-&gt;getEncoder($user);
+$hashedPassword = $encoder-&gt;encodePassword($plainPassword, $user-&gt;getSalt());
 </code></pre>
 
-<h2 id="verifying-a-password">Verifying a password</h2>
+<p><code>$user</code> is the object that represents the user and it must implement the
+<code>Symfony\Component\Security\Core\User\UserInterface</code> class.</p>
 
-<pre><code class="php">if (Yii::$app-&gt;getSecurity()-&gt;validatePassword($password, $hash)) {
-  // all good, logging user in
-} else {
-  // wrong password
-}
+<h3 id="verifying-a-password">Verifying a Password</h3>
+
+<p>Use the <code>isPasswordValid()</code> method of the encoder related to the user:</p>
+
+<pre><code class="php">$encoder = $app['security.encoder_factory']-&gt;getEncoder($user);
+$isValid = $encoder-&gt;isPasswordValid($user-&gt;getPassword(), $plainPassword, $user-&gt;getSalt());
 </code></pre>
+
+<p><code>$user</code> is the object that represents the user and it must implement the
+<code>Symfony\Component\Security\Core\User\UserInterface</code> class.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li><a href="http://silex.sensiolabs.org/doc/providers/security.html">Silex SecurityServiceProvider</a></li>
+</ul>
 
         </div>
     </article>
 	    <div class="byline col-sm-pull-10 col-sm-2 col-xs-12">
         <div class="author text-center">
-            <h4>Jason Ragsdale</h4>
-                        <img src="https://secure.gravatar.com/avatar/c33a23d256e895d5cc6898ea3051528c" alt="Jason Ragsdale">
-                                        <a class="author-twitter" href="https://twitter.com/Jasrags">
-                    <i class="fa fa-twitter"></i> @Jasrags
+            <h4>Javier Eguiluz</h4>
+                        <img src="https://secure.gravatar.com/avatar/9dc22dfc54bd9c666c72ebcd73d2fdd7" alt="Javier Eguiluz">
+                                        <a class="author-twitter" href="https://twitter.com/javiereguiluz">
+                    <i class="fa fa-twitter"></i> @javiereguiluz
                 </a>
                     </div>
                     <div class="sponsor text-center">
                 <h5>Sponsored By</h5>
-                <a class="sponsor-url" href="http://www.yiiframework.com/" title="Yiisoft">
-                                            <img src="http://static.yiiframework.com/css/img/logo.png">
+                <a class="sponsor-url" href="https://sensiolabs.com" title="SensioLabs">
+                                            <img src="/themes/dshafik/securepasswords.info/assets/images/sensiolabs.png">
                                     </a>
-                                    <a class="sponsor-twitter" href="https://twitter.com/yiiframework">
-                        <i class="fa fa-twitter"></i> @yiiframework
+                                    <a class="sponsor-twitter" href="https://twitter.com/sensiolabs">
+                        <i class="fa fa-twitter"></i> @sensiolabs
                     </a>
                             </div>
             </div>

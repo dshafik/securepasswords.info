@@ -48,14 +48,14 @@
 
 <p>It makes use of <a href="http://php.net/password">ext/password</a> in PHP 5.5+ or uses  <a href="https://packagist.org/packages/ircmaxell/password-compat">ircmaxell/password-compat</a> in earlier versions (<a href="http://securepasswords.info/php/">more here</a>)</p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>You can either clone the repo <code>https://github.com/auraphp/Aura.Auth</code> and include the <code>autoload.php</code> file or install via <a href="https://getcomposer.org/">composer</a> as below.</p>
 
 <pre><code class="sh">composer require "aura/auth:2.0.0-beta2"
 </code></pre>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 
 <p>In this example we are looking into authentication via database using <a href="http://php.net/pdo">PDO</a>. The <code>Aura\Auth\Verifier\PasswordVerifier</code> class help you to make use of different type of hashing algorithms in PHP. You can pass <code>PASSWORD_DEFAULT</code> to make use of <a href="http://php.net/password"><code>ext/password</code></a> functions or <code>md5</code>, <code>sha256</code> etc. It is recommended you use of <code>PASSWORD_DEFAULT</code>.</p>
 
@@ -97,7 +97,7 @@ $pdo_adapter = $auth_factory-&gt;newPdoAdapter($pdo, $hash, $cols, $from, $where
 
 <p>See more complex example using joins in <a href="https://github.com/auraphp/Aura.Auth">readme</a></p>
 
-<h2>Verifying a Password</h2>
+<h2 id="verifying-a-password">Verifying a Password</h2>
 
 <p>The login service will verify and throw exceptions according to the error happened:</p>
 
@@ -132,9 +132,9 @@ try {
 }
 </code></pre>
 
-<h2>Maintaining Login State</h2>
+<h2 id="maintaining-login-state">Maintaining Login State</h2>
 
-<h3>Resuming a Session</h3>
+<h3 id="resuming-a-session">Resuming a Session</h3>
 
 <p>Like PHP, Aura.Auth does not start the session automatically (<a href="https://github.com/auraphp/Aura.Auth#resuming-a-session">more info</a>).</p>
 
@@ -151,7 +151,7 @@ session_start();
 echo $auth-&gt;getStatus();
 </code></pre>
 
-<h3>Logging Out</h3>
+<h3 id="logging-out">Logging Out</h3>
 
 <p>The same applies to logout, you should either call <code>session_start</code> or resume service before you try logout, otherwise session data will not be removed:</p>
 
@@ -207,15 +207,8 @@ if ($auth-&gt;isAnon()) {
 						<ul>
                         	<li><a class="btn btn-default" href="/">Home</a></li>
 							<li><a class="btn btn-default" href="/about">About</a></li>
-							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">Contribute</a></li>
 						</ul>
-					</div>
-					<div class="row">
-						<p class="text-center" style="margin-top: 1em;">
-							Sponsored By
-							<br>
-							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
-						</p>
 					</div>
                 </div>
             </div>

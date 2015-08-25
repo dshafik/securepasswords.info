@@ -41,7 +41,7 @@ passwords as necessary, and will <em>upgrade</em> legacy passwords.</p>
 
 <p><em>Password Validator is available for all versions of PHP >= 5.3.7.</em></p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>The only officially supported method of installation is via
 <a href="http://getcomposer.org">Composer</a>.</p>
@@ -67,9 +67,9 @@ require_once '../vendor/autoload.php'
 
 <p>You're now ready to begin using the Password Validator.</p>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 
-<h3>Password Validation</h3>
+<h3 id="password-validation">Password Validation</h3>
 
 <p>If you're already using <a href="http://www.php.net/manual/en/function.password-hash.php"><code>password_hash</code></a> generated passwords in your
 application, you need do nothing more than add the validator in your
@@ -87,10 +87,9 @@ if ($result-&gt;isValid()) {
 </code></pre>
 
 <p>If your application requires options other than the <code>password_hash</code> defaults,
-you can set both the <code>salt</code> and <code>cost</code> options with <code>PasswordValidator::setOptions()</code>.</p>
+you can set the <code>cost</code> option with <code>PasswordValidator::setOptions()</code></p>
 
 <pre><code class="php">$options = array(
-    'salt' =&gt; 'SettingYourOwnSaltIsNotTheBestIdea',
     'cost' =&gt; 11,
 );
 $validator-&gt;setOptions($options);
@@ -101,7 +100,7 @@ existing hash implementation requires a different cost, make sure to specify it
 using <code>PasswordValidator::setOptions()</code>. If you do not do so, all of your
 passwords will be rehashed using a cost of <code>10</code>.</p>
 
-<h3>Rehashing</h3>
+<h3 id="rehashing">Rehashing</h3>
 
 <p>Each valid password is tested using <a href="http://www.php.net/manual/en/function.password-needs-rehash.php"><code>password_needs_rehash</code></a>. If a rehash
 is necessary, the valid password is hashed using <code>password_hash</code> with the
@@ -118,7 +117,7 @@ returned from <code>Result::getCode()</code> and the new password hash is availa
 <p><strong>IMPORTANT</strong>: If the password has been rehashed, it's critical that you
 persist the updated password hash. Otherwise, what's the point, right?</p>
 
-<h3>Upgrading Legacy Passwords</h3>
+<h3 id="upgrading-legacy-passwords">Upgrading Legacy Passwords</h3>
 
 <p>You can use the <code>PasswordValidator</code> whether or not you're currently using
 <code>password_hash</code> generated passwords. The validator will transparently upgrade
@@ -149,7 +148,7 @@ provided callback.  If the user's password is valid, it will be hashed with
 <code>PasswordValidator</code>. This allows a password that has already been upgraded to
 be properly validated, even when using the <code>UpgradeDecorator</code>.</p>
 
-<h3>Persisting Rehashed Passwords</h3>
+<h3 id="persisting-rehashed-passwords">Persisting Rehashed Passwords</h3>
 
 <p>Whenever a validation attempt returns <code>Result::SUCCESS_PASSWORD_REHASHED</code>, it's
 important to persist the updated password hash.</p>
@@ -168,7 +167,7 @@ will be automatically persisted.</p>
 <code>PasswordValidatorInterface</code> and an instance of the
 <code>JeremyKendall\Password\Storage\StorageInterface</code>.</p>
 
-<h4>StorageInterface</h4>
+<h4 id="storageinterface">StorageInterface</h4>
 
 <p>The <code>StorageInterface</code> includes a single method, <code>updatePassword()</code>. A class
 honoring the interface might look like this:</p>
@@ -190,12 +189,12 @@ class UserDao implements StorageInterface
     {
         $sql = 'UPDATE users SET password = :password WHERE username = :identity';
         $stmt = $this-&gt;db-&gt;prepare($sql);
-        $stmt-&gt;execute(array('password' =&gt; $password, 'username' =&gt; $identity));
+        $stmt-&gt;execute(array('password' =&gt; $password, 'identity' =&gt; $identity));
     }
 }
 </code></pre>
 
-<h4>Storage Decorator</h4>
+<h4 id="storage-decorator">Storage Decorator</h4>
 
 <p>With your <code>UserDao</code> in hand, you're ready to decorate a
 <code>PasswordValidatorInterface</code>.</p>
@@ -214,7 +213,7 @@ $result = $validator-&gt;isValid('password', 'passwordHash', null, 'username');
 <code>isValid()</code> when calling <code>StorageDecorator::isValid()</code>.  If you do not do so,
 the <code>StorageDecorator</code> will throw an <code>IdentityMissingException</code>.</p>
 
-<h3>Validation Results</h3>
+<h3 id="validation-results">Validation Results</h3>
 
 <p>Each validation attempt returns a <code>JeremyKendall\Password\Result</code> object. The
 object provides some introspection into the status of the validation process.</p>
@@ -231,13 +230,13 @@ object provides some introspection into the status of the validation process.</p
 <li><code>Result::getPassword()</code> will return the rehashed password, but only if the password was rehashed</li>
 </ul>
 
-<h3>Database Schema Changes</h3>
+<h3 id="database-schema-changes">Database Schema Changes</h3>
 
 <p>As mentioned above, because this library uses the <code>PASSWORD_DEFAULT</code> algorithm,
 it's important your password field be <code>VARCHAR(255)</code> to account for future
 updates to the default password hashing algorithm.</p>
 
-<h2>cost-check Helper Script</h2>
+<h2 id="cost-check-helper-script">cost-check Helper Script</h2>
 
 <p>The default <code>cost</code> used by <code>password_hash</code> is 10.  This may or may not be
 appropriate for your production hardware, and it's entirely likely you can use
@@ -288,15 +287,8 @@ Appropriate 'PASSWORD_DEFAULT' Cost Found:  13
 						<ul>
                         	<li><a class="btn btn-default" href="/">Home</a></li>
 							<li><a class="btn btn-default" href="/about">About</a></li>
-							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">Contribute</a></li>
 						</ul>
-					</div>
-					<div class="row">
-						<p class="text-center" style="margin-top: 1em;">
-							Sponsored By
-							<br>
-							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
-						</p>
 					</div>
                 </div>
             </div>

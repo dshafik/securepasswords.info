@@ -38,16 +38,16 @@
         <div>
             <p>With PHP 5.5, a new <a href="http://php.net/password">password extension</a> was added to that makes password security easy by default.</p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>The password extension is enabled by default in PHP 5.5+. If you are not yet using PHP 5.5, you can use the <a href="https://github.com/ircmaxell/password_compat">password_compat</a> library, as far back as PHP 5.3.17.</p>
 
 <p>To install password_compat, you can use composer:</p>
 
-<pre><code class="sh">$ composer require ircmaxell/password_compat
+<pre><code class="sh">$ composer require ircmaxell/password-compat
 </code></pre>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
 
 <p>The implementation consists of four functions:</p>
 
@@ -62,7 +62,7 @@ Check if a password meets the desired hash settings (algorithm, cost)</li>
 Returns information about the hash such as algorithm and cost</li>
 </ul>
 
-<h3>Hashing a Password</h3>
+<h3 id="hashing-a-password">Hashing a Password</h3>
 
 <p>To hash a password, do the following:</p>
 
@@ -75,7 +75,7 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT, ['cost' =&gt; 11
 
 <p>Additionally, we supply a third argument with the <code>cost</code>. The cost is what determines[a] how long the password takes to generate. It defaults to 10, however this is just a general guideline and your hardware will determine what makes more sense. The difference between an Amazon EC2 m3.medium and a c3.8xlarge is obviously going to have a significant impact on how long it takes to generate a hash.</p>
 
-<h3>Verifying a Password</h3>
+<h3 id="verifying-a-password">Verifying a Password</h3>
 
 <p>To verify a password, we do:</p>
 
@@ -89,7 +89,7 @@ if (password_verify($_POST['password'], $user-&gt;password)) {
 ?&gt;
 </code></pre>
 
-<h3>Keeping Your Users Secure</h3>
+<h3 id="keeping-your-users-secure">Keeping Your Users Secure</h3>
 
 <p>The last part of the puzzle is ensuring that passwords are kept up to date. We can do this in two ways. One by using <code>password_get_info()</code> to check the algorithm and cost against our current settings. Or two, by using the built-in function <code>password_needs_rehash()</code> to check the hash against the settings automatically. By checking this on login, we can automatically rehash and store their password using the latest settings as supplied by <code>PASSWORD_DEFAULT</code>, or a change in the cost option:</p>
 
@@ -119,15 +119,6 @@ if (password_verify($_POST['password'], $user-&gt;password)) {
                     <i class="fa fa-twitter"></i> @dshafik
                 </a>
                     </div>
-                    <div class="sponsor text-center">
-                <h5>Sponsored By</h5>
-                <a class="sponsor-url" href="https://www.engineyard.com" title="Engine Yard">
-                                            <img src="http://securepasswords.info/themes/dshafik/securepasswords.info/assets/images/engineyard.png">
-                                    </a>
-                                    <a class="sponsor-twitter" href="https://twitter.com/EngineYard">
-                        <i class="fa fa-twitter"></i> @EngineYard
-                    </a>
-                            </div>
             </div>
 	            </div>
         </div>
@@ -144,15 +135,8 @@ if (password_verify($_POST['password'], $user-&gt;password)) {
 						<ul>
                         	<li><a class="btn btn-default" href="/">Home</a></li>
 							<li><a class="btn btn-default" href="/about">About</a></li>
-							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info">Contribute</a></li>
+							<li><a class="btn btn-default" href="https://github.com/dshafik/securepasswords.info/blob/master/CONTRIBUTING.md">Contribute</a></li>
 						</ul>
-					</div>
-					<div class="row">
-						<p class="text-center" style="margin-top: 1em;">
-							Sponsored By
-							<br>
-							<a href="https://www.engineyard.com"><img src="/themes/dshafik/securepasswords.info/assets/images/engineyard.png" width="150"></a>
-						</p>
 					</div>
                 </div>
             </div>
