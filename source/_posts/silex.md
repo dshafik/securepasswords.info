@@ -21,7 +21,7 @@ the [password_compat] [2] library in your projects to enable `bcrypt` in PHP
 5.3.17+ versions:
 
 ```sh
-$ composer require ircmaxell/password_compat
+$ composer require ircmaxell/password-compat
 ```
 
 ## Usage
